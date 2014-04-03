@@ -1,0 +1,13 @@
+$mime = Input::file('file')->getMimeType();
+
+// dd($mine);
+
+if($mine == 'text/plain'){
+	// Do Some
+}else{
+	return "die";
+}
+
+
+uploading files with ajax
+code.tutsplus.com

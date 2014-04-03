@@ -1,0 +1,128 @@
+Route::get('view', function(){
+	return View::make('test');
+});
+
+Route::get('controller', 'BookController@actionIndex');
+
+Route::get('hello/{name}/{id}', function($name, $id){
+	return "Hello ". $name . ", your id is " . $id ;
+});
+
+Route::get('/optional/{name?}', function($name = null){
+	echo "Hello " . $name ;
+});
+
+
+Route::get('hello/{name}/{id}', function($name, $id){
+	return "hello " . $name . ", your id is " . $id;
+})->where('name', '[A-Za-z]+')->where('id', '[0-9]+');
+
+
+Route::get('name' , array(
+	'as' => 'nameroute',
+	function(){
+		return "Return From Name Route";
+	}));
+
+
+Route::get('namec', array(
+	'as' => 'namecontrollder',
+	'uses' 	=> 'BookController@actionIndex'
+	));
+
+Route::get('redirect', function(){
+	return Redirect::route('namecontrollder');
+});
+
+
+Route::get('redirectto', function(){
+	return Redirect::to('/');
+});
+
+
+Route::group(array('prefix' => 'admin'), function ()
+{
+	Route::get('user', function(){
+		return "Admin User";
+	});
+
+	Route::get('hell', function(){
+		App::abort(404);
+	});
+});
+
+
+// Route::get('save/{princess?}', function($princess = "MA Tin Shwe")
+// {
+//     return "Sorry, {$princess} is in another castle. :(";
+// })->where('princess', '[A-Za-z]+');
+
+
+Route::get('save/{princess}/{unicorn}', function($princess, $unicorn){
+	return "{$princess} loves {$unicorn}";
+})->where('princess', '[A-Za-z]+')
+
+->where('unicorn', '[0-9]+');
+
+
+
+
+Route::group(array('prefix'=> 'onlymylover'),function()
+{
+
+	//First Foute
+	Route::get('/first', function(){
+		return "Dude!";
+	});
+
+	//Second 
+	Route::get('/second', function(){
+		return "Duuuuuuuuuude!";
+	});
+
+	//Third
+	Route::get('/third', function(){
+		return "come to me love!";
+	});
+});	
+
+// Route::group(array('domain' => 'myapp.dev'), function()
+// {
+// 	Route::get('my/route', function() {
+// 		return 'Hello from myapp.dev!';
+// 	});
+// });
+
+// Route::group(array('domain' => 'another.myapp.dev'), function()
+// {
+// 	Route::get('my/route', function() {
+// 		return 'Hello from another.myapp.dev!';
+// 	});
+// });
+
+// Route::group(array('domain' => 'third.myapp.dev'), function()
+// {
+// 	Route::get('my/route', function() {
+// 		return 'Hello from third.myapp.dev!';
+// 	});
+// });
+
+
+Route::group(array('domain' => '{user}.myapp.dev'), function()
+{
+    Route::get('profile/{page}', function($user, $page) {
+        // ...
+    });
+});
+
+
+
+
+
+
+
+
+/*
+	as For name
+	use For Controller
+*/
