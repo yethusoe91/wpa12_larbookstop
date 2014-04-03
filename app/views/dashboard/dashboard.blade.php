@@ -42,12 +42,17 @@
   					<th>Email</th>
   					<th>Join Date</th>
   				</thead>
+                  <tbody>
+                       @foreach ($customers as $customer)          
+
   				<tr>
-  					<td>1</td>
-  					<td>2</td>
-  					<td>3</td>
-  					<td>4</td>
+  					<td>{{ $customer->id }} </td>
+  					<td>{{ $customer->username }} </td>
+  					<td>{{ $customer->email }} </td>
+  					<td>{{ $customer->updated_at }} </td>
   				</tr>
+                       @endforeach
+                      </tbody>
 			</table>
             		</div>
 	</div>

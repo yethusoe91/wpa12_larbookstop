@@ -27,19 +27,16 @@ Route::any('login', 'UserController@login');
 
 Route::group(array('before'=>'auth','prefix' => 'admin'),function(){ 
 		
-	/* login */
+	/* Dashboard */
+	Route::get('/' , 'DashboardController@getcustomer');
 
-	Route::get('/', function(){
-		return View::make('dashboard.dashboard');
-	});
-
+	/* Logout */
 	Route::get('logout', function(){
 		Auth::logout();
 		return Redirect::to('/admin');
 	});
 
 	/* Customer */
-
 	Route::get('allcustomer', 'CustomerController@index');
 
 	Route::any('editcustomer/{id}', array('as' => 'customer.edit', 'uses' => 'CustomerController@edit'));
@@ -60,47 +57,47 @@ Route::group(array('before'=>'auth','prefix' => 'admin'),function(){
 
 });
 
-Route::any('upload', function(){
-	if(Request::server('REQUEST_METHOD') == 'POST'){
+// Route::any('upload', function(){
+// 	if(Request::server('REQUEST_METHOD') == 'POST'){
 		
-		// Get file from FrontEnd Input 
-		$file = Input::file('file');
+// 		// Get file from FrontEnd Input 
+// 		$file = Input::file('file');
 		
-		// make destinationPath for uploaded file
-		$destinationPath = 'uploads/books';
+// 		// make destinationPath for uploaded file
+// 		$destinationPath = 'uploads/books';
 		
-		// Get uploaded file name
-		$filename = $file->getClientOriginalName();
+// 		// Get uploaded file name
+// 		$filename = $file->getClientOriginalName();
 
-		//$extension =$file->getClientOriginalExtension(); //if you need extension of the file
+// 		//$extension =$file->getClientOriginalExtension(); //if you need extension of the file
 
-		$mime = Input::file('file')->getMimeType();
+// 		$mime = Input::file('file')->getMimeType();
 
-		$path = Input::file('file')->getSize();
+// 		$path = Input::file('file')->getSize();
 		
-		dd($path);
+// 		dd($path);
 
-		// dd($mine);
+// 		// dd($mine);
 		
-		if($mime == 'image/png'){
+// 		if($mime == 'image/png'){
 
 
-			// Copy File To destinationPath
-			$upload_success = Input::file('file')->move($destinationPath, $filename);
+// 			// Copy File To destinationPath
+// 			$upload_success = Input::file('file')->move($destinationPath, $filename);
 
 
-			if('upload_success'){
-			return "Upload Ok!";
-			}else{
-				return "Error!";
-			}
+// 			if('upload_success'){
+// 			return "Upload Ok!";
+// 			}else{
+// 				return "Error!";
+// 			}
 
-		}else{
-			return "Your file type is wrong!!";
-		}	
-	}
-	return View::make('dashboard.upload');
-} );
+// 		}else{
+// 			return "Your file type is wrong!!";
+// 		}	
+// 	}
+// 	return View::make('dashboard.upload');
+// } );
 
 // Route::any('dashboard', array('before' => 'auth', function()
 // {
