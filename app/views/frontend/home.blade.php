@@ -1,8 +1,9 @@
 @extends ('layouts.master')
 @section('content')
 <div class="container">
+
 	<div class="row">
-		<h3 class="category-title"><span class="glyphicon glyphicon-bell"></span>Feature Books</h3>			
+		<h3 class="category-title" ><span class="glyphicon glyphicon-bell" ></span><span data-wow-duration="1s" data-wow-delay="1s" class="wow " >Feature Books</span></h3>			
 		<div class="col-md-12">
 			@foreach($books as $book)
 			<!--Offer start-->
@@ -14,8 +15,8 @@
 								<em>by</em> <small>{{ $book->author }} </small>
 							</div>
 						</div>
-						<div class="image">
-							<a href="{{ URL::to('detail')}}/{{ $book->id }}" ><img src="{{URL::to('/')}}/uploads/books/{{ $book->image}}" /></a>
+						<div class="image wow swing" >
+							<a href="{{ URL::to('detail')}}/{{ $book->id }}"><img src="{{URL::to('/')}}/uploads/books/{{ $book->image}}" /></a>
 						</div>
 						<div class="price">
 							{{ $book->price }} $

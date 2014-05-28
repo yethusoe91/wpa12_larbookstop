@@ -6,9 +6,14 @@
 		{{ trans('all.site-name') }} - {{ App::getLocale();  }}  {{isset($title) ? '- '.$title : '' }}
 	</title>
 	{{ HTML::style('css/bootstrap.css') }}
+	{{ HTML::style('css/animate.css')}}
 	{{ HTML::style('css/style.css')}}
 	{{ HTML::script('js/jquery.js') }}
 	{{ HTML::script('js/bootstrap.js') }}
+	{{ HTML::script('js/wow.min.js') }}
+	<script>
+	 	new WOW().init();
+	</script>
 </head>
 
 <body>	
