@@ -3,9 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Wpa12 Bookshop Dashboard</title>
-		{{ HTML::style('dashboard/ckeditor/contents.css')}}
-
+	<title>{{ (!empty($siteName)) ? $siteName : "LarBookShop"}} - {{isset($title) ? $title : '' }}</title>
+	{{ HTML::style('dashboard/ckeditor/contents.css')}}
 	{{ HTML::style('dashboard/css/bootstrap.min.css') }}
 	{{ HTML::style('dashboard/font-awesome/css/font-awesome.min.css') }}
 	{{ HTML::style('dashboard/css/sb-admin.css') }}
@@ -18,8 +17,8 @@
 
 </head>
 <body>
-	<div class="row">
-		<div class="col-md-12">
+	<div class="row header">
+		<div class="col-md-12 ">
 			<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
@@ -28,12 +27,12 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="{{ URL::to("/admin") }}">Wpa 12 Bookshop Dashboard</a>
+					<a class="navbar-brand" href="{{ URL::to("/dashboard") }}">Wpa 12 Bookshop Dashboard</a>
 				</div>
 				<!-- /.navbar-header -->
 				<ul class="nav navbar-top-links navbar-right">
 					<li>
-						<a href="{{ URL::to("/admin") }}"><span class="glyphicon glyphicon-home"></span></a>
+						<a href="{{ URL::to("/") }}" target="_blank"><span class="glyphicon glyphicon-home"></span></a>
 					</li>
 					<li>
 						<a href="" target="_blank"><span class="glyphicon glyphicon-transfer"></span></a>
@@ -119,78 +118,26 @@
 			</nav>
 			<!-- /.navbar-static-top -->
 			<!-- End of Head menu -->
-			<nav class="navbar-default navbar-static-side" role="navigation">
-				<div class="sidebar-collapse">
-					<ul class="nav" id="side-menu">
-						<li class="sidebar-search">
-							<div class="input-group custom-search-form">
-								<input type="text" class="form-control" placeholder="Search...">
-								<span class="input-group-btn">
-									<button class="btn btn-default" type="button">
-										<i class="fa fa-search"></i>
-									</button>
-								</span>
-							</div>
-							<!-- /input-group -->
-						</li>
-						<li>
-							<a href="{{ URL::to("/admin") }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard </a>
-						</li>
-						<li>
-							<a href="{{ URL::to("/admin") }}"><span class="glyphicon glyphicon-th-list"></span> Order</a>
-						</li>
-						<li>
-							<a href="#"><span class="glyphicon glyphicon-th-list"></span> Books 									      <span class="caret"></span>
-</a>
-							<ul class="nav nav-second-level">
-								<li>
-									<a href="{{ URL::to("/admin/allbook") }}"> All books</a>
-								</li>
-								<li>
-									<a href="{{ URL::to('/admin/addbook')}}"> Add books</a>
-								</li>
-							</ul>    
-						</li>
+			
+				<!-- /.navbar-static-side -->			
+				@yield('content')
+				<!-- Core Scripts - Include with every page -->
+				{{ HTML::script('dashboard/js/jquery.js') }}
+				{{ HTML::script('dashboard/js/bootstrap.js') }}
+				{{ HTML::script('dashboard/js/jquery.metisMenu.js') }}
+				{{ HTML::script('dashboard/js/jquery.tablesorter.min.js') }}
+				{{ HTML::script('dashboard/js/sb-admin.js') }}
+				{{ HTML::script('dashboard/js/bootstrap-datepicker.js') }}
 
-						<li>
-							<a href="{{ URL::to("admin/allcustomer") }}"><span class="glyphicon glyphicon-user"></span> Customer 									      <span class="caret"></span>
-</a>
-							<ul class="nav nav-second-level">
-								<li>
-									<a href="{{ URL::to("admin/allcustomer") }}">All Customer </a>
-
-								</li>
-								<li>
-									<a href="#">Online Customer</a>
-								</li>
-							</ul>
-							<!-- /.nav-second-level -->
-
-						</li>
-					</ul>
-					<!-- /#side-menu -->
-				</div>
-				<!-- /.sidebar-collapse -->
-			</nav>
-			<!-- /.navbar-static-side -->			
-			@yield('content')
-			<!-- Core Scripts - Include with every page -->
-			{{ HTML::script('dashboard/js/jquery.js') }}
-			{{ HTML::script('dashboard/js/bootstrap.js') }}
-			{{ HTML::script('dashboard/js/jquery.metisMenu.js') }}
-			{{ HTML::script('dashboard/js/jquery.tablesorter.min.js') }}
-			{{ HTML::script('dashboard/js/sb-admin.js') }}
-			{{ HTML::script('dashboard/js/bootstrap-datepicker.js') }}
-
+			</div>
 		</div>
-	</div>
-	<script type="text/javascript">
-		$(function(){
-			$("#myTable").tablesorter();
-		});
-	</script>
-	<script>
-                CKEDITOR.replace( 'ckeditor' );
-	</script>
-</body>
-</html>
+		<script type="text/javascript">
+			$(function(){
+				$("#myTable").tablesorter();
+			});
+		</script>
+		<script>
+			CKEDITOR.replace( 'ckeditor' );
+		</script>
+	</body>
+	</html>

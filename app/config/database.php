@@ -55,7 +55,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'larbookshop',
+			'database'  => 'larbookshop_on',
 			'username'  => 'root',
 			'password'  => 'DaweitharGood',
 			'charset'   => 'utf8',

@@ -1,16 +1,11 @@
-@extends ('layouts.admin_master')
-@section('content')
-<div id="page-wrapper">
-	<div class="row">
-		<div class="col-lg-12">
-			<h3 class="page-header">Edit Book</h3>
-		</div>
-		<!-- /.col-lg-12 -->
-	</div>
-	<!-- Content Start -->
-	<div class="row">
-		<div class="col-md-12">
+@extends('layouts.admin_master')
 
+@section('content')
+	<div class="row" style="margin-top:20px;">
+		<div class="col-md-2">
+			@include('dashboard.nav')
+		</div>
+		<div class="col-lg-10"  style="z-index:100;">
 			{{ Form::open(array('url' => URL::current() ,  'method' => 'POST')) }}
 
 			<div class="form-group">
@@ -22,6 +17,11 @@
 
 			{{ Form::text('bookname', $books->bookname , array('class' => 'form-control', 'placeholder' => 'bookname')) }} 
 			</div>
+			<div class="form-group">
+
+			 	{{ Form::select('category', $categories ,  $books->category_id ,  array('class' => 'form-control')); }}
+
+			</div>    
 			<div class="form-group">
 				@foreach($errors->get('description') as $error )
 				<div class="alert alert-danger">
@@ -46,7 +46,7 @@
                                                                       {{ $error }}
                                                         </div>
                                                         @endforeach
-                                                        {{ Form::text('price', null , array('class' => 'form-control', 'placeholder' => 'price')) }} 
+                                                        {{ Form::text('price', $books->price , array('class' => 'form-control', 'placeholder' => 'price')) }} 
                                           </div>     
 			<div class="form-group">
 				@foreach($errors->get('publisher') as $error )
@@ -64,6 +64,4 @@
 			{{ Form::close() }}
 		</div>	
 	</div>    
-</div>
-
 @stop

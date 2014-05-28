@@ -107,11 +107,11 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Way\Generators\GeneratorsServiceProvider',
-		'Intervention\Image\ImageServiceProvider',
-		'Wpa12\Advauth\AdvauthServiceProvider',
-		'Bookshop\Order\OrderServiceProvider',
-		
-	),
+		'Cartalyst\Sentry\SentryServiceProvider',	
+		'Mrjuliuss\Syntara\SyntaraServiceProvider',
+		'Gloudemans\Shoppingcart\ShoppingcartServiceProvider',
+		'Wpa12\Order\OrderServiceProvider'
+		),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -138,7 +138,6 @@ return array(
 	*/
 
 	'aliases' => array(
-
 		'App'             => 'Illuminate\Support\Facades\App',
 		'Artisan'         => 'Illuminate\Support\Facades\Artisan',
 		'Auth'            => 'Illuminate\Support\Facades\Auth',
@@ -177,6 +176,8 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 		'Image' => 'Intervention\Image\Facades\Image',
-	),
+		'Sentry' => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
+		'Cart'            => 'Gloudemans\Shoppingcart\Facades\Cart',
+		),
 
 );

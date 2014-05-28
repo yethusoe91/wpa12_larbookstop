@@ -1,10 +1,11 @@
-<?php
+<?php 
 
-class DashboardController extends BaseController {
-	public function getcustomer(){
-		$customers = Customer::all();
-		$customers = Customer::paginate(5);
-		return View::make('dashboard.dashboard', compact('customers'));
+class DashboardController extends BaseController{
+
+	public function index()
+	{
+		$this->layout =  View::make('dashboard.dashboard');
+
 	}
-}
 
+}

@@ -1,13 +1,15 @@
 <?php
 
 class BookController extends BaseController {
-
+	
 	// Show All Book
 	public function show()
 	{
-		$books = Book::all();
-		$books = Book::paginate(5);
-		return View::make('dashboard.booklist', compact('books'));
+	
+		$books = Book::orderBy('id', 'DESC')->paginate(10);
+		$this->layout =  View::make('dashboard.booklist', compact('books'));
+		$this->layout->breadcrumb = Config::get('syntara::breadcrumbs.allbooks');
+
 	}
 
 	// Add Book
@@ -19,7 +21,7 @@ class BookController extends BaseController {
 			$rules = array(
 				'bookname'	=> 'required|unique:books,bookname|min:3',
 				'description'	=> 'required',
-				'author'		=> 'required',
+				'author'	=> 'required',
 				'publisher'	=> 'required',
 				'price'		=> 'required',
 				'file'		=> 'required'
@@ -28,6 +30,14 @@ class BookController extends BaseController {
 			// Take All Data Except _Taken from form 
 			$bookdata = Input::all(); 
 
+			// dd($bookdata);
+
+			$publish = Input::get('publish');
+
+			if(isset($publish)){
+				dd($publish);
+			}
+			
 			// Validate $userdata and $rule
 			$validation = Validator::make($bookdata, $rules);
 
@@ -41,13 +51,12 @@ class BookController extends BaseController {
 				$destinationPath = 'uploads/books';
 				
 				// Get uploaded file name
-
 				$filename = $file->getClientOriginalName();
-
 				$upload = Input::file('file')->move($destinationPath, $filename);
 				
 				$book = New Book;
 				$book->bookname = Input::get('bookname');
+				$book->category_id = Input::get('category');
 				$book->description = Input::get('description');
 				$book->author = Input::get('author');
 				$book->image= $filename ;
@@ -56,28 +65,32 @@ class BookController extends BaseController {
 				$success = $book->save();
 
 				if($success){
-					return Redirect::to('admin/allbook')
+					return Redirect::to('dashboard/allbook')
 					->with('message' , 'successfully Add New Book!');
 				}
 
 			}
 
 		}
+		
+		$categories = AppHelper::Categories_all();
 
-		return View::make('dashboard.addbook');
+		$this->layout =  View::make('dashboard.addbook', compact('categories'));
+		$this->layout->breadcrumb = Config::get('syntara::breadcrumbs.addbook');
 	}	
 
 	// Edit Book
 	public function edit($id)
 	{
 		$books = Book::find($id);
-
-		if(Request::server('REQUEST_METHOD') == 'POST') {		
+		
+		if( Request::method() == 'POST') {		
 			// Rule For Edit Book
 			$rules = array(
 				'bookname'	=> 'required',
 				'description'	=> 'required',
 				'author'	=> 'required',
+				'category'	=> 'required',
 				'price'		=> 'required',
 				'publisher'	=> 'required',
 				);
@@ -95,18 +108,33 @@ class BookController extends BaseController {
 
 				$books->bookname = Input::get('bookname');
 				$books->description = Input::get('description');
+				$books->category_id = Input::get('category');
 				$books->author = Input::get('author');
 				$books->price = Input::get('price');
 				$books->publisher = Input::get('publisher');
 				$success = $books->save();
 
 				if($success){
-					return Redirect::to('admin/allbook')
+					return Redirect::to('dashboard/allbook')
 					->with('message' , 'successfully Add New Book!');
+
 				}
+
 			}
 		}
-		return View::make('dashboard.editbook')->with('books', $books);
+
+		$categories = AppHelper::categories_all();
+
+		$this->layout =  View::make('dashboard.editbook', compact('books','categories'));
+		$this->layout->breadcrumb = Config::get('syntara::breadcrumbs.editbook');
+
 	}	
+
+	public function delete($id)
+	{
+		$customer = Book::find($id);
+		$customer->delete();
+		return Redirect::to('dashboard/allbook')->with('message',' Successfully Deleted!!');
+	}
 
 };

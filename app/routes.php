@@ -11,61 +11,73 @@
 |
 */
 
-Route::get('/' , 'FrontendController@index');
 
-Route::get('detail/{id}' , 'FrontendController@detail');
+/* Frontend*/
+Route::get('/' , array('before' => 'language' , 'uses' => 'FrontendController@index'));
+Route::get('detail/{id}' , array('before' => 'language', 'uses' => 'FrontendController@detail'));
+Route::get('category/{id}' , array('as' => 'cagetory.single' , 'uses' => 'FrontendController@category'));
 
-// For Register 
+// For Customer Login 
 Route::get('register', 'UserController@register');
 
 Route::post('register', array(
 	'before'	=> 'csrf' ,
 	'uses'	=> 'UserController@register'
-));
+	));
 
-Route::any('login', 'UserController@login');
+Route::group(array('before' => 'basicAuth|test' ,'prefix' => Config::get('syntara::config.uri')),function(){ 
 
-Route::group(array('before'=>'auth','prefix' => 'admin'),function(){ 
-		
-	/* Dashboard */
-	Route::get('/' , 'DashboardController@getcustomer');
-
-	/* Logout */
-	Route::get('logout', function(){
-		Auth::logout();
-		return Redirect::to('/admin');
-	});
-
-	/* Customer */
-	Route::get('allcustomer', 'CustomerController@index');
-
-	Route::any('editcustomer/{id}', array('as' => 'customer.edit', 'uses' => 'CustomerController@edit'));
-
-	Route::any('deletecustomer/{id}', array('as' => 'customer.delete', 'uses' => 'CustomerController@delete'));
-
-	Route::get('customer/detail/{id}', array( 'as' => 'customer.detail','uses' => 'CustomerController@detail'));
+	Route::get('/', array(
+		'as'	=> 'dashboard',
+		'uses' => 'DashboardController@index')
+	);
 
 	/* Book */
+	Route::get('allbook', array(
+		'as'	=> 'book.all',
+		'uses' => 'BookController@show')
+	);
 
-	Route::get('allbook', 'BookController@show');
-
-	Route::any('addbook', 'BookController@add');
+	Route::any('addbook', array( 
+		'as' =>  'book.add',
+		'uses' =>  'BookController@add')
+	);
 
 	Route::any('editbook/{id}', array('as' => 'book.edit', 'uses' => 'BookController@edit'));
 
+	Route::any('deletebook/{id}', array('as' => 'book.delete', 'uses' => 'BookController@delete'));
+
 	Route::any('uploadimage' , 'ImageController@post_upload');
+
+	Route::any('add-category' , array('as' => 'category.show' , 'uses' => 'CategoryController@show'));
 
 });
 
+// Change Lang
+Route::get('/change-lang/{lang}', array('as' => 'change-lang', 'uses' => 'FrontendController@ChaLang'));
+
+//Just for testing
+Route::get('test/', 'TestController@test');
+
+// Add New Navs , extends Syntara
+View::composer('syntara::layouts.dashboard.master', function($view)
+{
+	$view->nest('navPages', 'left-nav');
+});
+
+
+// Override View
+// Config::set('syntara.views.dashboard.admin', 'dashboard.master');
+
 // Route::any('upload', function(){
 // 	if(Request::server('REQUEST_METHOD') == 'POST'){
-		
+
 // 		// Get file from FrontEnd Input 
 // 		$file = Input::file('file');
-		
+
 // 		// make destinationPath for uploaded file
 // 		$destinationPath = 'uploads/books';
-		
+
 // 		// Get uploaded file name
 // 		$filename = $file->getClientOriginalName();
 
@@ -74,11 +86,11 @@ Route::group(array('before'=>'auth','prefix' => 'admin'),function(){
 // 		$mime = Input::file('file')->getMimeType();
 
 // 		$path = Input::file('file')->getSize();
-		
+
 // 		dd($path);
 
 // 		// dd($mine);
-		
+
 // 		if($mime == 'image/png'){
 
 

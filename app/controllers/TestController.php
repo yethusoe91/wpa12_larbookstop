@@ -1,79 +1,30 @@
-<?php
+<?php 
 
-class TestController extends \BaseController {
-
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
+Class TestController extends BaseController{
+	public function test()
 	{
-		//
-	}
+		
+		// $books = Book::where('category_id', '=', $id)->get();
+		
+		// foreach ($books as $book) {
+		// 	var_dump($book->bookname);
+		// }
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
+		// $books = Category::find(2)->books;
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
+		// foreach ($books as $book) {
+		// 	var_dump($book->bookname);
+		// }
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
+		Cart::add('192ao12', 'Product 1', 1, 9.99);
+		
+		Cart::add('1239ad0', 'Product 2', 2, 5.95, array('size' => 'large'));
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
+		$cart = Cart::content();
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
+		$this->layout =  View::make('cart', compact('cart'));
+		
 	}
 
 }

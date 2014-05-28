@@ -24,16 +24,16 @@
  	transform:rotate(360deg);
  }
  .offer{
- 	background:#fff; border:1px solid #ddd; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); margin: 15px 0; overflow:hidden;
+ 	background:#fff; border:1px solid #ddd; box-shadow: 0 3px 2px rgba(0, 0, 0, 0.25); margin: 15px 0; overflow:hidden;height: 428px;
  }
  .offer:hover {-webkit-transform: scale(1.1); -moz-transform: scale(1.1); -ms-transform: scale(1.1); -o-transform: scale(1.1); transform:rotate scale(1.1); -webkit-transition: all 0.4s ease-in-out; -moz-transition: all 0.4s ease-in-out; -o-transition: all 0.4s ease-in-out; transition: all 0.4s ease-in-out;}
- .shape {
+ 
+/* .shape {
  	border-color: rgba(255,255,255,0) #d9534f rgba(255,255,255,0) rgba(255,255,255,0);
  }
  .offer-radius{
  	border-radius:7px;
  }
- .offer-danger {	border-color: #d9534f; }
  .offer-danger .shape{
  	border-color: transparent #d9534f transparent transparent;
  }
@@ -59,7 +59,7 @@
  .offer-warning .shape{
  	border-color: transparent #f0ad4e transparent transparent;
  }
-
+ */
  .shape-text{
  	color:#fff; font-size:12px; font-weight:bold; position:relative; right:-40px; top:2px; white-space: nowrap;
  	-ms-transform:rotate(30deg); /* IE 9 */
@@ -131,12 +131,12 @@
  }
  .account-wall
  {
- 	margin-top: 20px;
- 	padding: 40px 0px 20px 0px;
- 	background-color: #f7f7f7;
  	-moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
  	-webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+ 	background-color: #f7f7f7;
  	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+ 	margin-top: 20px;
+ 	padding: 40px 0px 20px 0px;
  }
  .login-title
  {
@@ -200,3 +200,161 @@
  .customer-profile-container{
  	min-height: 400px;
  }
+
+ /* Home Book List Box */
+
+ .book-info-container{
+ 	/*width: 255px;*/
+ 	height: 380px;
+ 	border-radius: 3px;
+ 	background: #fff;
+ 	border: 1px solid #ddd;
+ 	box-shadow: 0 3px 2px rgba(0, 0, 0, 0.25);
+ 	margin-top: 50px;
+ 	/**/
+ 	position: relative;	
+
+ }	
+ .book-info-container:hover{
+ }
+
+ .book-info-container .title{
+ 	text-transform: capitalize;
+ 	text-align: center;
+ 	padding: 13px;
+ 	min-height: 10px;
+ 	position: absolute;
+ 	background: rgba(241, 136, 136, 0.9);
+ 	color: #fff;
+ 	width: 100%;
+ 	bottom: -100px;
+ 	-webkit-transition: all .25s ease-in;
+ 	-moz-transition: all .25s ease-in;
+ 	-ms-transition: all .25s ease-in;
+ 	-o-transition: all .25s ease-in;
+ 	transition: all .25s ease-in;
+ }
+
+ .offer:hover .title
+ {
+ 	bottom: 300px;
+ 	z-index: 100;
+
+ }
+ .book-info-container  .image{
+ 	width: 200px;
+ 	height: 308px;
+ }
+
+ .book-info-container  .image img{
+ 	text-align: center;
+ 	display: inline-block;
+ 	width: 200px;
+ 	height: 308px;
+ 	margin-left: 27px;
+ 	margin-top: 22px;
+ 	z-index: 1;
+	-webkit-transition: all .25s ease-in;
+ 	-moz-transition: all .25s ease-in;
+ 	-ms-transition: all .25s ease-in;
+ 	-o-transition: all .25s ease-in;
+ 	transition: all .25s ease-in;
+
+ }
+ .offer:hover .image img{
+	-webkit-filter: blur(1px);
+
+ }
+
+ .book-info-container  .price{
+ 	position: absolute;
+ 	top: -100px;
+ 	background: rgba(241, 136, 136, 0.9);
+ 	width: 100%;
+ 	text-align: center;
+ 	color: #fff;
+ 	height: 43px;
+	padding-top: 4px;
+ 	-webkit-transition: all .25s ease-in-out;
+ 	-moz-transition: all .25s ease-in-out;
+ 	-ms-transition: all .25s ease-in-out;
+ 	-o-transition: all .25s ease-in-out;
+ 	transition: all .25s ease-in-out;
+}
+
+ .offer:hover .price{
+ 	top: 310px;
+ }
+
+ .book-info-container  .add-to-cart{
+ 	position: absolute;
+ 	bottom: 0;
+ 	left: 0;
+ 	text-align: center;
+ 	width: 100%;
+ 	background: #fff;
+ 	text-decoration: none;
+ 	outline: none;
+ 	padding: 10px 0;
+
+ }
+
+ .offer:hover .add-to-cart, .offer:hover .add-to-cart i{
+	color: green;
+ }
+
+ /*.offer:hover .add-to-cart i{
+	color: green;
+ }*/
+
+ .pdg-lft-10{
+ 	padding-right: 10px;
+ }
+
+
+/* Header */
+
+.header
+{
+	background-image:url(../images/congruent_pentagon.png);
+	background-color: rgb(235, 235, 235);
+	border-bottom: 5px solid #706B6B;
+	border-top: 1px solid;
+}
+
+
+/* Home */
+
+h3.category-title
+{
+	padding-left: 25px;
+}
+
+
+.main-nav
+{
+	padding-top: 16px;
+}
+
+.main-nav a
+{
+	color: rgb(17, 133, 13);
+}
+
+/* BreadCrumb */
+
+.breadcrumb-container{
+	margin-bottom: 20px;
+}
+
+/* Footer */
+
+.footer-container
+{
+	background-image:url(../images/stardust.png);
+	margin-top: 10px;
+	border-top:5px solid #706B6B;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	color: rgb(167, 156, 156);
+}

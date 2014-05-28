@@ -13,7 +13,16 @@
 
 App::before(function($request)
 {
-	//
+	// change language
+	if (Session::has('locale'))
+	{
+	           $language= Session::get('locale' , 'en');        
+		App::setLocale($language);	
+	}
+
+	// Override Admin Layouts
+	Config::set('syntara::views.dashboard-index', 'layouts.admin_master');
+
 });
 
 
@@ -35,7 +44,7 @@ App::after(function($request, $response)
 
 Route::filter('auth', function()
 {
-	if (Auth::guest()) return Redirect::guest('login');
+	if (Auth::guest()) return Redirect::guest('login-user');
 });
 
 
@@ -79,3 +88,37 @@ Route::filter('csrf', function()
 	}
 });
 
+
+Route::filter('basicAuth', function()
+{
+	if(!Sentry::check())
+	{
+		// save the attempted url
+		Session::put('attemptedUrl', URL::current());
+
+		return Redirect::route('getLogin');
+	}
+
+	View::share('currentUser', Sentry::getUser());
+});
+
+// Add Category for man navigation
+$categories = Category::orderBy('id', 'ASC')->paginate(10);
+
+View::share('categories', $categories);
+View::share('languages', Config::get('languages'));
+
+/* It is working, but got new solution by assing to AppBefore*/
+// Route::filter('language', function(){
+           
+// 	if (Session::has('locale'))
+// 	{
+// 	           $language= Session::get('locale' , 'en');        
+// 		App::setLocale($language);	
+// 	}
+// });
+
+// Route::filter('test_filter', function($route) {
+//     $param = $route->getParameter('hi'); // use the key you defined
+//     return "The value is $param";
+// });
