@@ -1,7 +1,6 @@
 @extends ('layouts.master')
 @section('content')
 <div class="container">
-
 	<div class="row">
 		<h3 class="category-title" ><span class="glyphicon glyphicon-bell" ></span><span data-wow-duration="1s" data-wow-delay="1s" class="wow " >Feature Books</span></h3>			
 		<div class="col-md-12">
@@ -15,7 +14,7 @@
 								<em>by</em> <small>{{ $book->author }} </small>
 							</div>
 						</div>
-						<div class="image wow swing" >
+						<div class="image wow bounceIn" >
 							<a href="{{ URL::to('detail')}}/{{ $book->id }}"><img src="{{URL::to('/')}}/uploads/books/{{ $book->image}}" /></a>
 						</div>
 						<div class="price">

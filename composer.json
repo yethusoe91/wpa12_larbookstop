@@ -8,9 +8,7 @@
 		"way/generators" : "*",
                              	"cartalyst/sentry": "2.1.*",
                              	"mrjuliuss/syntara": "1.2.*",
-                             	"gloudemans/shoppingcart": "dev-master"
-
-                             	
+                             	"gloudemans/shoppingcart": "dev-master"	
 	},
 	"autoload": {
 		"classmap": [

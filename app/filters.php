@@ -16,10 +16,10 @@ App::before(function($request)
 	// change language
 	if (Session::has('locale'))
 	{
-	           $language= Session::get('locale' , 'en');        
+	           $language= Session::get('locale', 'en');        
 		App::setLocale($language);	
 	}
-
+	
 	// Override Admin Layouts
 	Config::set('syntara::views.dashboard-index', 'layouts.admin_master');
 
@@ -106,6 +106,7 @@ Route::filter('basicAuth', function()
 $categories = Category::orderBy('id', 'ASC')->paginate(10);
 
 View::share('categories', $categories);
+
 View::share('languages', Config::get('languages'));
 
 /* It is working, but got new solution by assing to AppBefore*/

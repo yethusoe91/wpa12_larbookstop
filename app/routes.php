@@ -14,7 +14,9 @@
 
 /* Frontend*/
 Route::get('/' , array('before' => 'language' , 'uses' => 'FrontendController@index'));
+
 Route::get('detail/{id}' , array('before' => 'language', 'uses' => 'FrontendController@detail'));
+
 Route::get('category/{id}' , array('as' => 'cagetory.single' , 'uses' => 'FrontendController@category'));
 
 // For Customer Login 

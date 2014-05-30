@@ -22,7 +22,7 @@
 						</div>
 						@endforeach
 						
-						{{ Form::select('category', $categories , 4 , array('class' => 'form-control')); }}
+						{{ Form::select('category', $categories , null , array('class' => 'form-control')); }}
 
 					</div>              
 					<div class="form-group">

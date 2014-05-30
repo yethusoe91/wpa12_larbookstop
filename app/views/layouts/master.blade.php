@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>
-		{{ trans('all.site-name') }} - {{ App::getLocale();  }}  {{isset($title) ? '- '.$title : '' }}
+		{{ trans('all.site-name') }}  {{isset($title) ? '- '.$title : '' }}
 	</title>
 	{{ HTML::style('css/bootstrap.css') }}
 	{{ HTML::style('css/animate.css')}}
@@ -11,6 +11,7 @@
 	{{ HTML::script('js/jquery.js') }}
 	{{ HTML::script('js/bootstrap.js') }}
 	{{ HTML::script('js/wow.min.js') }}
+	{{ HTML::script('js/carousel.js') }}
 	<script>
 	 	new WOW().init();
 	</script>
@@ -37,9 +38,9 @@
 					</div>
 					<div class="collapse navbar-collapse  pull-right" style="margin-right:16px;">
 						<ul class="nav navbar-nav">
-							<li><a href=""><i class="glyphicon glyphicon-home"></i></a></li>
-							<li><a href="/layout/cart.php"><i class="glyphicon glyphicon-shopping-cart"></i></a></li>
-							<li><a href="/layout/profile.php"><i class="glyphicon glyphicon-user"></i></a></li>
+							<li><a href="#"><i class="glyphicon glyphicon-home"></i></a></li>
+							<li><a href="#"><i class="glyphicon glyphicon-shopping-cart"></i></a></li>
+							<li><a href="#"><i class="glyphicon glyphicon-user"></i></a></li>
 							<li><a href="{{ URL::to('dashboard') }}"><i class="glyphicon glyphicon-log-in"></i></a></li>
 							<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Languages <b class="caret"></b></a>
@@ -75,29 +76,39 @@
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Books By Category <b class="caret"></b></a>
 								<ul class="dropdown-menu">
+								
+										
+									@foreach($categories as $category)
+										
+										@if ($category->books()->count()  !=  '0')
 
-								@foreach($categories as $category)
-									
-									<li><a href="{{ URL::route('cagetory.single', $category->id )}}">{{ $category->name }}</a></li>
-									
+										<li>
+										<a href="{{ URL::route('cagetory.single', $category->id )}}">{{ $category->name }}
+										<small>
+										<span class="label label-primary pull-right"  style="margin-top: 5px;">{{$category->books()->count()}} books</span></small>
+										</a>
+										</li>
+										
+										@endif
 
-								@endforeach
+									@endforeach
+
 								</ul>
 							</li>
 						</ul>
 						<ul class="nav navbar-nav">					
-							<li><a href="/view/category.php">New books</a></li>
-							<li><a href="/view/music.php">Bestsellers</a></li>
-							<li><a href="/view/software.php">Used Books</a></li>
+							<li><a href="#">New books</a></li>
+							<li><a href="#">Bestsellers</a></li>
+							<li><a href="#">Used Books</a></li>
 						</ul>	
-						<!-- <div class="input-group custom-search-form col-md-5 pull-right" style="margin-right:16px;">
+						<div class="input-group custom-search-form col-md-3 pull-right" style="margin-right:16px;">
 							<input type="text" class="form-control">
 							<span class="input-group-btn">
 								<button class="btn btn-default" type="button">
 									<span class="glyphicon glyphicon-search"></span>
 								</button>
 							</span>
-						</div> --><!-- /input-group -->
+						</div><!-- /input-group-->
 					</div>
 
 				</nav>
@@ -148,5 +159,8 @@
 				});
 			});
 		</script>
+
+		
+
 	</body>
 	</html>
